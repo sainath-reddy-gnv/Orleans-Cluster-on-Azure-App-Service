@@ -6,13 +6,16 @@ param appInsightsInstrumentationKey string
 param appInsightsConnectionString string
 param storageConnectionString string
 
-resource appServicePlan 'Microsoft.Web/serverfarms@2021-03-01' = {
+resource appServicePlan 'Microsoft.Web/serverfarms@2020-06-01' = {
   name: '${appName}-plan'
   location: location
   kind: 'app'
   sku: {
     name: 'S1'
     capacity: 1
+  }
+  properties: {
+    reserved: true
   }
 }
 
@@ -27,7 +30,7 @@ resource appService 'Microsoft.Web/sites@2021-03-01' = {
     siteConfig: {
       vnetPrivatePortsCount: 2
       webSocketsEnabled: true
-      netFrameworkVersion: 'v6.0'
+      netFrameworkVersion: 'v7.0'
       appSettings: [
         {
           name: 'APPINSIGHTS_INSTRUMENTATIONKEY'
@@ -52,8 +55,10 @@ resource appService 'Microsoft.Web/sites@2021-03-01' = {
 }
 
 resource stagingSlot 'Microsoft.Web/sites/slots@2022-03-01' = {
-  name: '${appName}stg'
+  parent: appService
+  name: 'stage'
   location: location
+  kind: 'app'
   properties: {
     serverFarmId: appServicePlan.id
     virtualNetworkSubnetId: stagingSubnetId
