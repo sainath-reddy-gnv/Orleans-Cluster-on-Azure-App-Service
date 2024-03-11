@@ -6,7 +6,7 @@ on:
     - main
 
 env:
-  UNIQUE_APP_NAME: orleansgnvsr1
+  UNIQUE_APP_NAME: orleansgnvsr2
   AZURE_RESOURCE_GROUP_NAME: orleansrg
   AZURE_RESOURCE_GROUP_LOCATION: eastus
 
