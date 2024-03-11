@@ -6,8 +6,8 @@ on:
     - main
 
 env:
-  UNIQUE_APP_NAME: orleansgnvsr
-  AZURE_RESOURCE_GROUP_NAME: orleans-rg
+  UNIQUE_APP_NAME: orleansgnvsr1
+  AZURE_RESOURCE_GROUP_NAME: orleansrg
   AZURE_RESOURCE_GROUP_LOCATION: eastus
 
 jobs:
